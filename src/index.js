@@ -1,30 +1,61 @@
 class Sorter {
+
   constructor() {
-    // your implementation
+      this.array = [];
   }
 
   add(element) {
-    // your implementation
+      this.array.push(element);
   }
 
   at(index) {
-    // your implementation
+      return this.array[index];
   }
 
   get length() {
-    // your implementation
+      return this.array.length;
   }
 
   toArray() {
-    // your implementation
+      return this.array;
   }
 
   sort(indices) {
-    // your implementation
+      indices = indices.sort();
+      var minIdx, temp, nextIdx,
+          len = indices.length;
+      for (var i = 0; i < len; i++) {
+          minIdx = indices[i];
+          for (var j = i + 1; j < len; j++) {
+              nextIdx = indices[j];
+              if (this.array[nextIdx] < this.array[minIdx]) {
+                  minIdx = nextIdx;
+              }
+          }
+          temp = this.array[indices[i]];
+          this.array[indices[i]] = this.array[minIdx];
+          this.array[minIdx] = temp;
+      }
   }
 
   setComparator(compareFunction) {
-    // your implementation
+      this.sort = function(indices) {
+          indices = indices.sort();
+          var minIdx, temp, nextIdx,
+              len = indices.length;
+          for (var i = 0; i < len; i++) {
+              minIdx = indices[i];
+              for (var j = i + 1; j < len; j++) {
+                  nextIdx = indices[j];
+                  if (compareFunction(this.array[nextIdx], this.array[minIdx]) < 0) {
+                      minIdx = nextIdx;
+                  }
+              }
+              temp = this.array[indices[i]];
+              this.array[indices[i]] = this.array[minIdx];
+              this.array[minIdx] = temp;
+          }
+      };
   }
 }
 
